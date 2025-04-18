@@ -170,11 +170,6 @@ vim.g.vimwiki_list = { { auto_diary_index = 1 } }
 vim.g.vimwiki_auto_header = 1
 vim.g.vimwiki_global_ext = 0
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'markdown',
-  command = 'setlocal textwidth=70',
-})
-
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -644,6 +639,7 @@ require('lazy').setup({
   require 'custom.plugins.vimwiki',
   require 'custom.plugins.vim-maximize',
   require 'custom.plugins.blink-cmp',
+  require 'custom.plugins.markdown',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
