@@ -506,6 +506,7 @@ require('lazy').setup({
   require 'custom.plugins.markdown',
   require 'custom.plugins.harpoon',
   require 'custom.plugins.simplenote',
+  require 'custom.plugins.pytest',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
