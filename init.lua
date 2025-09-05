@@ -30,9 +30,9 @@ vim.opt.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-  vim.opt.clipboard = 'unnamed'
-end)
+-- vim.schedule(function()
+--   vim.opt.clipboard = 'unnamed'
+-- end)
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -506,6 +506,7 @@ require('lazy').setup({
   require 'custom.plugins.markdown',
   require 'custom.plugins.harpoon',
   require 'custom.plugins.simplenote',
+  require 'custom.plugins.justfile',
   require 'custom.plugins.pytest',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
