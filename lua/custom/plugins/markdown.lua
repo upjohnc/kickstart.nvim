@@ -10,7 +10,7 @@ return {
 
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'markdown',
-      command = 'setlocal textwidth=70',
+      command = 'setlocal textwidth=65',
     })
   end,
   ft = { 'markdown' },
