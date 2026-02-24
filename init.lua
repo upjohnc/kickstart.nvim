@@ -497,7 +497,6 @@ require('lazy').setup({
   require 'custom.plugins.fugitive',
   require 'custom.plugins.lsp',
   require 'custom.plugins.vimwiki',
-  require 'custom.plugins.copilot',
   require 'custom.plugins.vim-maximize',
   require 'custom.plugins.blink-cmp',
   require 'custom.plugins.undo',
