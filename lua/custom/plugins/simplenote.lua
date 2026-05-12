@@ -9,7 +9,7 @@ return {
     vim.keymap.set('n', '<leader>Su', vim.cmd.SimplenoteUpdate, { desc = 'Upadete simplenote' })
 
     vim.g.SimplenoteUsername = 'upjohnc@pm.me'
-    vim.g.SimplenotePassword = '$SN_PASSWORD'
+    vim.g.SimplenotePassword = os.getenv(SN_PASSWORD)
     vim.g.SimplenoteFiletype = 'markdown'
   end,
 }

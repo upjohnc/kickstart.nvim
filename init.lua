@@ -136,12 +136,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-vim.api.nvim_create_autocmd('BufWritePre', {
-  group = vim.api.nvim_create_augroup('save-clean', { clear = true }),
-  pattern = '*',
-  command = [[%s/\s\+$//e]],
-})
-
 vim.api.nvim_create_autocmd('BufLeave', {
   group = vim.api.nvim_create_augroup('save-on-exit', { clear = true }),
   pattern = '*',
@@ -380,11 +374,22 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        rust = { 'rustfmt', lsp_format = 'fallback' },
+        -- You can use a function here to determine the formatters dynamically
+        python = function(bufnr)
+          if require('conform').get_formatter_info('ruff_format', bufnr).available then
+            return { 'ruff_format' }
+          else
+            return { 'isort', 'black' }
+          end
+        end,
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        html = { 'prettier' },
+        ['_'] = { 'trim_whitespace' },
       },
     },
   },
