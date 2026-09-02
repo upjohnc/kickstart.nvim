@@ -6,6 +6,9 @@ vim.g.maplocalleader = ','
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- for simplenote: Set the path to your Python 3 interpreter
+vim.g.python3_host_prog = '/usr/bin/python3'
+
 -- Markdown fold
 vim.g.markdown_folding = 1
 
