@@ -196,6 +196,8 @@ return {
     local servers = {
       -- clangd = {},
       -- gopls = {},
+      ts_ls = {},
+      cssmodules_ls = {},
       basedpyright = {},
       rust_analyzer = {},
       taplo = {},
