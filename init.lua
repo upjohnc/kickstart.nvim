@@ -465,23 +465,44 @@ require('lazy').setup({
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
     branch = 'main',
-    main = 'nvim-treesitter.config', -- Sets main module to use for opts
+    build = ':TSUpdate',
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    opts = {
-      ensure_installed = { 'rust', 'python', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
-    },
+    config = function()
+      require('nvim-treesitter').install {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'javascript',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'python',
+        'query',
+        'rust',
+        'vim',
+        'vimdoc',
+      }
+
+      local group = vim.api.nvim_create_augroup('kickstart-treesitter', { clear = true })
+      vim.api.nvim_create_autocmd('FileType', {
+        group = group,
+        callback = function(args)
+          -- Bail out for filetypes we have no parser (or queries) for
+          if not vim.treesitter.language.add(vim.treesitter.language.get_lang(args.match)) then
+            return
+          end
+
+          -- Highlighting (`:h treesitter-highlight`)
+          pcall(vim.treesitter.start, args.buf)
+
+          -- Indentation is still considered experimental by the plugin
+          vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
+    end,
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
     --
@@ -506,6 +527,8 @@ require('lazy').setup({
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
+  require 'custom.plugins.autotag',
+  require 'custom.plugins.lspsaga',
   require 'custom.plugins.nerdtree',
   require 'custom.plugins.fugitive',
   require 'custom.plugins.lsp',
